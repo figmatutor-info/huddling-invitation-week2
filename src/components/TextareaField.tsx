@@ -13,7 +13,8 @@ export default function TextareaField({
   return (
     <textarea
       rows={rows}
-      className={`block w-full resize-none rounded-control border border-border-subtle bg-surface-default px-16 py-12 text-body-lg text-text-primary outline-none placeholder:text-text-disabled focus:border-action-primary ${className}`}
+      // 테두리는 Figma처럼 안쪽에 그린다(ring-inset). 바깥 border는 높이를 2px 키운다.
+      className={`block w-full resize-none rounded-control bg-surface-default px-16 py-12 text-body-lg text-text-primary outline-none ring-1 ring-inset ring-border-subtle placeholder:text-text-disabled focus:ring-action-primary ${className}`}
       {...props}
     />
   );

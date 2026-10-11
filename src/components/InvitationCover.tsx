@@ -37,7 +37,7 @@ function CoverDetail({ label, value }: { label: string; value: string }) {
       <span className="rounded-8 bg-info-subtle px-6 py-2 text-caption-md text-info-strong">
         {label}
       </span>
-      <p className="whitespace-pre-line text-label-md text-text-inverse">{value}</p>
+      <p className="w-full whitespace-pre-line break-words text-label-md text-text-inverse">{value}</p>
     </div>
   );
 }

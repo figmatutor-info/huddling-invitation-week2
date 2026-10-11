@@ -35,7 +35,7 @@ async function Invitation({ params }: Pick<PageProps<"/i/[id]">, "params">) {
 
       <div className="flex w-full flex-col items-center gap-16 bg-surface-default px-20 py-80">
         <Image type="2" alt="" />
-        <p className="w-full whitespace-pre-wrap text-center text-body-compact text-text-primary">
+        <p className="w-full whitespace-pre-wrap break-words text-center text-body-compact text-text-primary">
           {invitation.body}
         </p>
       </div>

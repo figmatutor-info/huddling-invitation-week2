@@ -13,6 +13,7 @@ import Label from "@/components/Label";
 import NavBar from "@/components/NavBar";
 import SuccessIcon from "@/components/SuccessIcon";
 import Textarea from "@/components/Textarea";
+import { LIMITS } from "@/lib/limits";
 
 // /create : 호스트가 초대장 내용을 입력하고, 미리보기를 보며 발행한다 (Figma node 69:906)
 export default function CreatePage() {
@@ -80,6 +81,7 @@ export default function CreatePage() {
           <Textarea
             id="title"
             name="title"
+            maxLength={LIMITS.title}
             label="제목"
             rows={2}
             required
@@ -92,6 +94,7 @@ export default function CreatePage() {
           <Input
             id="date"
             name="date"
+            maxLength={LIMITS.date}
             label="일시"
             required
             placeholder="예) 2026년 11월 14일 (토) 09:00"
@@ -101,6 +104,7 @@ export default function CreatePage() {
           <Input
             id="location"
             name="location"
+            maxLength={LIMITS.location}
             label="장소"
             required
             placeholder="예) 세종 남극 기지"
@@ -110,6 +114,7 @@ export default function CreatePage() {
           <Textarea
             id="body"
             name="body"
+            maxLength={LIMITS.body}
             label="본문"
             required
             placeholder="게스트에게 전할 초대 글을 적어주세요"
@@ -127,7 +132,7 @@ export default function CreatePage() {
 
             <div className="flex w-full flex-col items-center gap-16 bg-surface-default px-20 py-80">
               <Image type="2" alt="" />
-              <p className="w-full whitespace-pre-wrap text-center text-body-compact text-text-primary">
+              <p className="w-full whitespace-pre-wrap break-words text-center text-body-compact text-text-primary">
                 {body}
               </p>
             </div>

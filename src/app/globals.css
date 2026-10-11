@@ -30,7 +30,7 @@
   --color-action-primary: var(--color-indigo-500);
   --color-action-secondary: var(--color-blue-500);
   --color-action-on-primary: var(--color-neutral-0);
-  --color-action-hover-overlay: var(--color-neutral-1000);
+  --color-action-hover-overlay: #1f3dbcb2; /* blue-800을 70% 불투명하게. 버튼 배경 위에 덮는다 */
   --color-background-default: var(--color-neutral-0);
   --color-background-subtle: var(--color-neutral-50);
   --color-border-default: var(--color-neutral-200);

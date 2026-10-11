@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ko"className="h-full antialiased">
+    <html lang="ko" className="h-full antialiased">
       {/* Pretendard 글꼴 (공식 jsDelivr, 화면에 쓰인 글자만 내려받는 dynamic subset) */}
       <link
         rel="stylesheet"

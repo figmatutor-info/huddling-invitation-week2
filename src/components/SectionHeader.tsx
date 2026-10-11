@@ -19,10 +19,11 @@ export default function SectionHeader({
   className = "",
 }: SectionHeaderProps) {
   return (
-    <div className={`flex w-full flex-col items-center gap-stack-md text-center ${className}`}>
+    // break-words: 띄어쓰기 없는 긴 글자도 폭 안에서 줄바꿈한다 (자식에게 이어진다)
+    <div className={`flex w-full flex-col items-center gap-stack-md break-words text-center ${className}`}>
       {subtitle && (
         <p
-          className={`text-label-md ${inverse ? "text-text-inverse opacity-60" : "text-info-default"}`}
+          className={`w-full text-label-md ${inverse ? "text-text-inverse opacity-60" : "text-info-default"}`}
         >
           {subtitle}
         </p>
@@ -30,14 +31,14 @@ export default function SectionHeader({
       {title && (
         // 입력한 줄바꿈을 그대로 보여준다 (제목 최대 2줄)
         <Title
-          className={`whitespace-pre-line text-title-lg ${inverse ? "text-text-inverse" : "text-text-primary"}`}
+          className={`w-full whitespace-pre-line text-title-lg ${inverse ? "text-text-inverse" : "text-text-primary"}`}
         >
           {title}
         </Title>
       )}
       {description && (
         <p
-          className={`whitespace-pre-line text-body-md ${inverse ? "text-text-inverse" : "text-text-primary"}`}
+          className={`w-full whitespace-pre-line text-body-md ${inverse ? "text-text-inverse" : "text-text-primary"}`}
         >
           {description}
         </p>

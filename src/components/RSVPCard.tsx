@@ -9,6 +9,7 @@ import Label from "@/components/Label";
 import RadioOption from "@/components/RadioOption";
 import Stepper from "@/components/Stepper";
 import SuccessIcon from "@/components/SuccessIcon";
+import { LIMITS } from "@/lib/limits";
 
 // Figma RSVPCard (node 95:647)
 // 보기 화면(/i/[id])의 참석 신청 카드.
@@ -98,6 +99,7 @@ export default function RSVPCard({ onSubmit, className = "" }: RSVPCardProps) {
         <Input
           id={`${id}-name`}
           name="name"
+          maxLength={LIMITS.name}
           label="이름"
           required
           placeholder="이름을 입력해주세요"

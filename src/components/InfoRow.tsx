@@ -19,7 +19,7 @@ export default function InfoRow({
         <span className="whitespace-nowrap text-body-md text-text-secondary">
           {label}
         </span>
-        <span className="min-w-0 flex-1 text-right text-label-md text-text-strong">
+        <span className="min-w-0 flex-1 break-words text-right text-label-md text-text-strong">
           {value}
         </span>
       </div>
@@ -30,7 +30,7 @@ export default function InfoRow({
     <div className={`flex items-center gap-10 text-label-lg ${className}`}>
       <span className="whitespace-nowrap text-text-secondary">{label}</span>
       <span aria-hidden className="h-14 w-1 shrink-0 bg-border-default" />
-      <span className="min-w-0 text-text-strong">{value}</span>
+      <span className="min-w-0 break-words text-text-strong">{value}</span>
     </div>
   );
 }
