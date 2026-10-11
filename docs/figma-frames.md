@@ -5,8 +5,9 @@ URL은 Figma에서 프레임을 선택한 뒤 `우클릭 → Copy link to select
 
 | 경로 | 화면 | Figma 프레임 URL |
 | --- | --- | --- |
-| `/create` | 만들기 (입력·미리보기·발행) | |
-| `/create` (발행 완료) | 링크 공유 | |
-| `/i/[id]` | 초대장 보기·응답 폼 | |
-| `/i/[id]` (제출 완료) | 응답 완료 | |
-| `/i/[id]/responses` | 응답 현황 | |
+| `/create` | 만들기 (입력·미리보기·발행) | https://www.figma.com/design/9wsLVoa0cd4T0Hsw2uws7d/?node-id=69-906 |
+| `/create` (발행 완료) | 링크 공유 | https://www.figma.com/design/9wsLVoa0cd4T0Hsw2uws7d/?node-id=69-926 |
+| `/i/[id]` | 초대장 보기·응답 폼 | https://www.figma.com/design/9wsLVoa0cd4T0Hsw2uws7d/?node-id=74-525 |
+| `/i/[id]` (제출 완료) | 응답 완료 | https://www.figma.com/design/9wsLVoa0cd4T0Hsw2uws7d/?node-id=86-580 |
+| `/i/[id]/responses` | 응답 현황 | https://www.figma.com/design/9wsLVoa0cd4T0Hsw2uws7d/?node-id=69-881 |
+| `/i/[id]/responses` (응답 0건) | 응답 현황 빈 화면 | https://www.figma.com/design/9wsLVoa0cd4T0Hsw2uws7d/?node-id=99-699 |

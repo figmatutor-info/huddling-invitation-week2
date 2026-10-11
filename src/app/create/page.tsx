@@ -2,13 +2,16 @@
 
 import { useState } from "react";
 import type { FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
+import CopyLinkField from "@/components/CopyLinkField";
 import Image from "@/components/Image";
 import InfoRow from "@/components/InfoRow";
 import Input from "@/components/Input";
 import InvitationCover from "@/components/InvitationCover";
 import Label from "@/components/Label";
 import NavBar from "@/components/NavBar";
+import SuccessIcon from "@/components/SuccessIcon";
 import Textarea from "@/components/Textarea";
 
 // /create : 호스트가 초대장 내용을 입력하고, 미리보기를 보며 발행한다 (Figma node 69:906)
@@ -18,12 +21,53 @@ export default function CreatePage() {
   const [location, setLocation] = useState("");
   const [body, setBody] = useState("");
 
+  // 발행된 초대장 id. 값이 있으면 같은 화면이 발행 완료 상태로 바뀐다
+  const [publishedId, setPublishedId] = useState<string | null>(null);
+  const router = useRouter();
+
   // 필수값이 하나라도 비어 있으면 발행 버튼을 막는다
   const canPublish = [title, date, location, body].every((v) => v.trim() !== "");
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // TODO: Supabase에 저장하고 초대장 링크·응답 현황 링크를 보여준다
+    // TODO: Supabase에 저장하고 새로 만든 id를 쓴다. 지금은 가짜 데이터 demo로 연결한다
+    setPublishedId("demo");
+    window.scrollTo(0, 0);
+  }
+
+  // 발행 완료 화면 (Figma node 69:926)
+  if (publishedId) {
+    const inviteUrl = `${window.location.origin}/i/${publishedId}`;
+
+    return (
+      <main className="mx-auto flex w-full max-w-mobile flex-col gap-20 bg-surface-default">
+        <NavBar title="발행 완료" />
+        <div className="flex w-full flex-col gap-40 px-page-horizontal pb-80">
+          <div className="flex w-full flex-col items-center gap-12 py-24 text-center">
+            <SuccessIcon />
+            <h1 className="text-title-lg text-text-strong">초대장이 발행됐어요!</h1>
+            <p className="text-body-md text-text-secondary">아래 두 링크를 복사해 두세요.</p>
+          </div>
+          <CopyLinkField
+            title="초대장 링크"
+            url={inviteUrl}
+            description="게스트에게 공유하는 링크예요."
+          />
+          <CopyLinkField
+            title="응답 현황 링크"
+            url={`${inviteUrl}/responses`}
+            description="호스트용이에요. 이 링크를 아는 사람은 응답 목록을 볼 수 있어요."
+          />
+          <Button
+            size="lg"
+            className="w-full"
+            onClick={() => router.push(`/i/${publishedId}`)}
+          >
+            내 초대장 보기
+          </Button>
+        </div>
+      </main>
+    );
   }
 
   return (
