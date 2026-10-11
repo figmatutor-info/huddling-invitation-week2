@@ -4,10 +4,10 @@ import Image from "@/components/Image";
 import InfoRow from "@/components/InfoRow";
 import InvitationCover from "@/components/InvitationCover";
 import RSVPCard from "@/components/RSVPCard";
-import { mockInvitation } from "@/lib/mock";
+import { getMockInvitation } from "@/lib/mock";
 
 // /i/[id] : 게스트가 초대장을 보고 참석 여부를 보낸다 (Figma node 74:525)
-// 지금은 가짜 데이터(mock.ts)만 쓰므로 /i/demo 에서만 열린다.
+// 지금은 가짜 데이터(mock.ts)만 쓰므로 /i/demo, /i/empty 에서만 열린다.
 export default function InvitePage({ params }: PageProps<"/i/[id]">) {
   return (
     <main className="mx-auto w-full max-w-mobile">
@@ -21,7 +21,7 @@ export default function InvitePage({ params }: PageProps<"/i/[id]">) {
 
 async function Invitation({ params }: Pick<PageProps<"/i/[id]">, "params">) {
   const { id } = await params;
-  const invitation = id === mockInvitation.id ? mockInvitation : null;
+  const invitation = getMockInvitation(id);
 
   if (!invitation) notFound();
 
