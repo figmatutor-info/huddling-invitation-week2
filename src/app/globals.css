@@ -65,6 +65,10 @@
   --spacing-section: 32px;
   --spacing-page-horizontal: 20px;
 
+  /* 화면 크기 (Figma create 프레임 기준) */
+  --container-mobile: 375px; /* max-w-mobile: 화면 최대 너비 */
+  --spacing-preview: 489px; /* h-preview: 미리보기 스크롤 영역 높이 (516 - 라벨 19 - 간격 8) */
+
   /* 모서리 둥글기 (예: rounded-8, rounded-card) */
   --radius-0: 0px;
   --radius-6: 6px;

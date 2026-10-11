@@ -206,7 +206,7 @@ export default function Home() {
           className="-mx-page-horizontal w-auto"
           subtitle="Huddling Club 2nd Meetup"
           title={"허들링 클럽 2번째\n오프라인 밋업"}
-          date="2026년 11월 14일 (토) 09:00~18:00"
+          date="2026년 11월 14일 (토) 09:00"
           location="세종 남극 기지"
         />
       </section>
