@@ -14,7 +14,7 @@ import { LIMITS } from "@/lib/limits";
 // Figma RSVPCard (node 95:647)
 // 보기 화면(/i/[id])의 참석 신청 카드.
 // 제출 전에는 form, 제출이 끝나면 같은 자리에서 done 화면으로 바뀐다.
-// 실제 저장은 onSubmit으로 받은 함수가 한다 (아직 연결 전).
+// 실제 저장은 onSubmit으로 받은 함수가 한다 (/i/[id]에서 submitRsvp를 넘긴다).
 export type RsvpData = {
   name: string;
   status: "yes" | "no";
@@ -80,7 +80,11 @@ export default function RSVPCard({ onSubmit, className = "" }: RSVPCardProps) {
             label="참석 여부"
             value={submitted.status === "yes" ? "참석" : "불참"}
           />
-          <InfoRow type="spread" label="동반 인원" value={`${submitted.companions}명`} />
+          <InfoRow
+            type="spread"
+            label="동반 인원"
+            value={`${submitted.companions}명`}
+          />
         </div>
       </div>
     );

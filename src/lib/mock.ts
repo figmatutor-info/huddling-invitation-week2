@@ -1,23 +1,7 @@
 // 가짜 데이터 (docs/PRD.md 기준)
-// Supabase를 연결하기 전까지 화면 개발·확인용으로 쓴다.
-
-// 초대장: 제목 · 일시 · 장소 · 본문
-export type Invitation = {
-  id: string;
-  title: string; // 최대 2줄, 줄바꿈(\n)은 그대로 보여준다
-  date: string; // 일시. 화면에 보이는 글자 그대로 저장한다
-  location: string; // 장소. 주소를 글자로만 표시한다 (지도 없음)
-  body: string; // 본문. 줄바꿈(\n)은 그대로 보여준다
-};
-
-// 참석 응답: 이름 · 참석 여부 · 동반 인원
-export type Rsvp = {
-  id: string;
-  invitationId: string;
-  name: string;
-  status: "yes" | "no"; // yes 참석 · no 불참
-  companions: number; // 본인을 제외한 동반 인원. 불참이면 0
-};
+// 지금은 화면에서 쓰지 않는다. 실제 데이터는 Supabase에서 읽는다 (lib/invitations.ts).
+// 참고용으로 남겨 둔다.
+import type { Invitation, Rsvp } from "@/lib/invitations";
 
 // 실제 서비스에서는 추측하기 어려운 ID(crypto.randomUUID())를 쓴다.
 // "demo"는 가짜 데이터 확인용 ID다.
@@ -40,12 +24,32 @@ export const mockEmptyInvitation: Invitation = {
 
 // demo 초대장의 응답: 참석 2명 · 불참 1명 (empty 초대장의 응답은 없다)
 export const mockRsvps: Rsvp[] = [
-  { id: "rsvp-1", invitationId: "demo", name: "김허들", status: "yes", companions: 1 },
-  { id: "rsvp-2", invitationId: "demo", name: "이펭귄", status: "yes", companions: 0 },
-  { id: "rsvp-3", invitationId: "demo", name: "박남극", status: "no", companions: 0 },
+  {
+    id: "rsvp-1",
+    invitationId: "demo",
+    name: "김허들",
+    status: "yes",
+    companions: 1,
+  },
+  {
+    id: "rsvp-2",
+    invitationId: "demo",
+    name: "이펭귄",
+    status: "yes",
+    companions: 0,
+  },
+  {
+    id: "rsvp-3",
+    invitationId: "demo",
+    name: "박남극",
+    status: "no",
+    companions: 0,
+  },
 ];
 
 // id로 가짜 초대장을 찾는다. 없으면 null
 export function getMockInvitation(id: string): Invitation | null {
-  return [mockInvitation, mockEmptyInvitation].find((inv) => inv.id === id) ?? null;
+  return (
+    [mockInvitation, mockEmptyInvitation].find((inv) => inv.id === id) ?? null
+  );
 }

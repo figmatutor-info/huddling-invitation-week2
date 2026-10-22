@@ -13,6 +13,7 @@ import Label from "@/components/Label";
 import NavBar from "@/components/NavBar";
 import SuccessIcon from "@/components/SuccessIcon";
 import Textarea from "@/components/Textarea";
+import { publishInvitation } from "@/lib/actions";
 import { LIMITS } from "@/lib/limits";
 
 // /create : 호스트가 초대장 내용을 입력하고, 미리보기를 보며 발행한다 (Figma node 69:906)
@@ -24,16 +25,28 @@ export default function CreatePage() {
 
   // 발행된 초대장 id. 값이 있으면 같은 화면이 발행 완료 상태로 바뀐다
   const [publishedId, setPublishedId] = useState<string | null>(null);
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState("");
   const router = useRouter();
 
-  // 필수값이 하나라도 비어 있으면 발행 버튼을 막는다
-  const canPublish = [title, date, location, body].every((v) => v.trim() !== "");
+  // 필수값이 하나라도 비어 있거나 저장 중이면 발행 버튼을 막는다
+  const canPublish =
+    [title, date, location, body].every((v) => v.trim() !== "") && !pending;
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // TODO: Supabase에 저장하고 새로 만든 id를 쓴다. 지금은 가짜 데이터 demo로 연결한다
-    setPublishedId("demo");
-    window.scrollTo(0, 0);
+    setPending(true);
+    setError("");
+    try {
+      // Supabase에 저장하고 새로 만든 id를 받는다
+      const id = await publishInvitation({ title, date, location, body });
+      setPublishedId(id);
+      window.scrollTo(0, 0);
+    } catch {
+      setError("발행하지 못했어요. 잠시 후 다시 시도해주세요.");
+    } finally {
+      setPending(false);
+    }
   }
 
   // 발행 완료 화면 (Figma node 69:926)
@@ -46,8 +59,12 @@ export default function CreatePage() {
         <div className="flex w-full flex-col gap-40 px-page-horizontal pb-80">
           <div className="flex w-full flex-col items-center gap-12 py-24 text-center">
             <SuccessIcon />
-            <h1 className="text-title-lg text-text-strong">초대장이 발행됐어요!</h1>
-            <p className="text-body-md text-text-secondary">아래 두 링크를 복사해 두세요.</p>
+            <h1 className="text-title-lg text-text-strong">
+              초대장이 발행됐어요!
+            </h1>
+            <p className="text-body-md text-text-secondary">
+              아래 두 링크를 복사해 두세요.
+            </p>
           </div>
           <CopyLinkField
             title="초대장 링크"
@@ -76,7 +93,10 @@ export default function CreatePage() {
     <main className="mx-auto flex w-full max-w-mobile flex-col gap-10 bg-surface-default pb-120">
       <NavBar title="초대장 만들기" />
 
-      <form onSubmit={handleSubmit} className="flex w-full flex-col gap-40 px-page-horizontal pb-80">
+      <form
+        onSubmit={handleSubmit}
+        className="flex w-full flex-col gap-40 px-page-horizontal pb-80"
+      >
         <div className="flex w-full flex-col gap-24">
           <Textarea
             id="title"
@@ -89,7 +109,9 @@ export default function CreatePage() {
             helper="엔터로 줄을 나눌 수 있어요 · 최대 2줄"
             value={title}
             // 제목은 최대 2줄까지만 받는다
-            onChange={(e) => setTitle(e.target.value.split("\n").slice(0, 2).join("\n"))}
+            onChange={(e) =>
+              setTitle(e.target.value.split("\n").slice(0, 2).join("\n"))
+            }
           />
           <Input
             id="date"
@@ -151,8 +173,16 @@ export default function CreatePage() {
 
         {/* 화면 하단에 고정. 큰 화면에서도 375px 폭 가운데에 놓인다 */}
         <div className="fixed inset-x-0 bottom-0 flex justify-center">
-          <div className="w-full max-w-mobile bg-surface-default p-20">
-            <Button type="submit" size="lg" disabled={!canPublish} className="w-full">
+          <div className="flex w-full max-w-mobile flex-col gap-8 bg-surface-default p-20">
+            {error && (
+              <p className="text-caption-md text-feedback-error">{error}</p>
+            )}
+            <Button
+              type="submit"
+              size="lg"
+              disabled={!canPublish}
+              className="w-full"
+            >
               발행하기
             </Button>
           </div>
